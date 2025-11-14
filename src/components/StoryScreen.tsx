@@ -26,9 +26,18 @@ export const StoryScreen = ({ storyIndex }: StoryScreenProps) => {
     // If there's no image, skip loading state
     if (!story?.image) {
       setImageLoading(false);
-    } else {
-      setImageLoading(true);
+      return;
     }
+    
+    // Preload the image
+    setImageLoading(true);
+    const img = new Image();
+    img.onload = () => setImageLoading(false);
+    img.onerror = () => {
+      setImageError(true);
+      setImageLoading(false);
+    };
+    img.src = story.image;
   }, [storyIndex, story?.image]);
 
   // Handle case where story doesn't exist
@@ -142,6 +151,7 @@ export const StoryScreen = ({ storyIndex }: StoryScreenProps) => {
                         onError={handleImageError}
                         onLoad={handleImageLoad}
                         className="w-full h-auto object-cover"
+                        style={storyIndex === 3 ? { maxWidth: '70%', margin: '0 auto' } : undefined}
                       />
                     ) : (
                       // Fallback gradient background with alt text

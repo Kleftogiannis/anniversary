@@ -4,13 +4,22 @@ import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import { content } from '../data/content';
 import { scaleIn, fadeIn } from '../utils/animations';
+import { PhotoGallery } from './shared/PhotoGallery';
 
 export const FinaleScreen = () => {
   const navigate = useNavigate();
-  const { message, submessage, qrCode, animation } = content.finale;
-  const [qrCodeError, setQrCodeError] = useState(false);
+  const { message, submessage, animation } = content.finale;
   const [easterEggClicked, setEasterEggClicked] = useState(false);
   const [showEasterEggMessage, setShowEasterEggMessage] = useState(false);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
+  // Gallery images with hover messages
+  const galleryImages = [
+    { src: '/src/assets/extraPic1.jpg', caption: 'Woop, our first time😏💦' },
+    { src: '/src/assets/extraPic2.jpg', caption: 'So pretty...😍' },
+    { src: '/src/assets/extraPic3.jpg', caption: 'Plokamakiaaa' },
+    { src: '/src/assets/extraPic4.jpg', caption: 'Little Bouzouktzou' },
+  ];
 
   // Calculate days together
   const startDate = new Date('2024-12-01');
@@ -64,11 +73,6 @@ export const FinaleScreen = () => {
     }
   }, []);
 
-  const handleQrCodeError = () => {
-    setQrCodeError(true);
-    console.error(`Failed to load QR code: ${qrCode}`);
-  };
-
   const handleEasterEggClick = () => {
     if (!easterEggClicked) {
       setEasterEggClicked(true);
@@ -102,7 +106,7 @@ export const FinaleScreen = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
         onClick={handleBackToStart}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 px-4 py-2 rounded-lg"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 px-4 py-2 rounded-lg cursor-pointer"
         style={{
           background: 'rgba(255, 255, 255, 0.5)',
           backdropFilter: 'blur(10px)',
@@ -110,12 +114,33 @@ export const FinaleScreen = () => {
           border: '2px solid rgba(255, 255, 255, 0.6)',
           fontFamily: 'Pixelify Sans, sans-serif',
           color: '#5d4037',
-          cursor: 'pointer',
         }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         Back to Start
+      </motion.button>
+
+      {/* Photo Gallery Button - Top Left */}
+      <motion.button
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+        onClick={() => setIsGalleryOpen(true)}
+        className="absolute top-4 left-4 sm:top-6 sm:left-6 z-50 px-4 py-2 rounded-lg cursor-pointer"
+        style={{
+          background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)',
+          border: '3px solid rgba(255, 255, 255, 0.8)',
+          boxShadow: '0 8px 24px rgba(255, 107, 157, 0.4)',
+          fontFamily: 'Pixelify Sans, sans-serif',
+          color: 'white',
+          fontWeight: 'bold',
+          textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
+        }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        📸 Honorable Mentions
       </motion.button>
 
       {/* Content container */}
@@ -237,38 +262,6 @@ export const FinaleScreen = () => {
           </motion.div>
         )}
 
-        {/* Optional QR code */}
-        {qrCode && !qrCodeError && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2, duration: 0.5 }}
-            className="inline-block bg-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-          >
-            <img 
-              src={qrCode} 
-              alt="QR Code" 
-              className="w-40 h-40 sm:w-48 sm:h-48 mx-auto"
-              onError={handleQrCodeError}
-            />
-            <p className="text-xs sm:text-sm text-gray-600 mt-2">Scan for a surprise!</p>
-          </motion.div>
-        )}
-        
-        {/* Fallback if QR code fails */}
-        {qrCode && qrCodeError && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2, duration: 0.5 }}
-            className="inline-block bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-lg"
-          >
-            <div className="w-40 h-40 sm:w-48 sm:h-48 mx-auto bg-gradient-to-br from-romantic-200 to-romantic-300 rounded-lg flex items-center justify-center">
-              <span className="text-5xl">🎁</span>
-            </div>
-            <p className="text-xs sm:text-sm text-gray-600 mt-2">Special surprise awaits!</p>
-          </motion.div>
-        )}
       </div>
 
       {/* Decorative hearts around the message - responsive positioning */}
@@ -332,7 +325,7 @@ export const FinaleScreen = () => {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 0.8, scale: 1 }}
           transition={{ delay: 2, duration: 0.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
+          className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-1/2 transform -translate-x-1/2 cursor-pointer"
           onClick={handleEasterEggClick}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
@@ -385,6 +378,13 @@ export const FinaleScreen = () => {
           </motion.div>
         </motion.div>
       )}
+
+      {/* Photo Gallery Modal */}
+      <PhotoGallery 
+        images={galleryImages}
+        isOpen={isGalleryOpen}
+        onClose={() => setIsGalleryOpen(false)}
+      />
     </motion.div>
   );
 };

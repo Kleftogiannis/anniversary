@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
-/* Stardew Valley Font */
-@font-face {
-  font-family: 'Stardew Valley';
-  src: url('./assets/STARDEW VALLEY REGULAR.TTF') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+
+/* Custom Black Heart Emoji Cursor - Original Size */
+* {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext x='8' y='30' font-size='24'%3E🖤%3C/text%3E%3C/svg%3E") 20 20, auto;
+}
+
+button, a, [role="button"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext x='8' y='30' font-size='24'%3E🖤%3C/text%3E%3C/svg%3E") 20 20, pointer !important;
 }
 
 /* Performance optimizations for animations */

@@ -20,7 +20,7 @@ export const NavigationGuard = ({ children, requiredPath }: NavigationGuardProps
     const visitedPaths = hasVisited ? JSON.parse(hasVisited) : [];
 
     // Define the expected flow order
-    const flowOrder = ['/', '/story/1', '/story/2', '/timeline', '/choice/1', '/choice/2', '/finale'];
+    const flowOrder = ['/', '/story/1', '/story/2', '/story/3', '/story/4', '/story/5', '/timeline', '/choice/1', '/choice/2', '/choice/3', '/finale'];
     const currentIndex = flowOrder.indexOf(location.pathname);
 
     if (currentIndex > 0) {

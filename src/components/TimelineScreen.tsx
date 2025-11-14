@@ -72,7 +72,7 @@ export const TimelineScreen = () => {
                     color: '#4a4a4a',
                   }}
                 >
-                  Find a house to live together
+                  Find a house to live together 🔑<br />(we are so close, be patient with me)
                 </p>
               </div>
             </motion.div>

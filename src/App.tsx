@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { LoadingScreen } from './components/shared/LoadingScreen';
+import { CursorTrail } from './components/shared/CursorTrail';
 
 // Lazy load route components for better performance
 const IntroScreen = lazy(() => import('./components/IntroScreen').then(module => ({ default: module.IntroScreen })));
@@ -15,8 +16,10 @@ function App() {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={<LoadingScreen message="Loading..." />}>
+    <>
+      <CursorTrail />
+      <AnimatePresence mode="wait">
+        <Suspense fallback={<LoadingScreen message="Loading..." />}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<IntroScreen />} />
           <Route 
@@ -32,6 +35,30 @@ function App() {
             element={
               <NavigationGuard>
                 <StoryScreen storyIndex={1} />
+              </NavigationGuard>
+            } 
+          />
+          <Route 
+            path="/story/3" 
+            element={
+              <NavigationGuard>
+                <StoryScreen storyIndex={2} />
+              </NavigationGuard>
+            } 
+          />
+          <Route 
+            path="/story/4" 
+            element={
+              <NavigationGuard>
+                <StoryScreen storyIndex={3} />
+              </NavigationGuard>
+            } 
+          />
+          <Route 
+            path="/story/5" 
+            element={
+              <NavigationGuard>
+                <StoryScreen storyIndex={4} />
               </NavigationGuard>
             } 
           />
@@ -60,6 +87,14 @@ function App() {
             } 
           />
           <Route 
+            path="/choice/3" 
+            element={
+              <NavigationGuard>
+                <ChoiceScreen choiceIndex={2} />
+              </NavigationGuard>
+            } 
+          />
+          <Route 
             path="/finale" 
             element={
               <NavigationGuard>
@@ -72,6 +107,7 @@ function App() {
         </Routes>
       </Suspense>
     </AnimatePresence>
+    </>
   );
 }
 
