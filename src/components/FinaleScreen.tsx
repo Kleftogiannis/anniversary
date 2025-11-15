@@ -5,6 +5,11 @@ import confetti from 'canvas-confetti';
 import { content } from '../data/content';
 import { scaleIn, fadeIn } from '../utils/animations';
 import { PhotoGallery } from './shared/PhotoGallery';
+import heartsSvg from '../assets/hearts.svg';
+import extraPic1 from '../assets/extraPic1.jpg';
+import extraPic2 from '../assets/extraPic2.jpg';
+import extraPic3 from '../assets/extraPic3.jpg';
+import extraPic4 from '../assets/extraPic4.jpg';
 
 export const FinaleScreen = () => {
   const navigate = useNavigate();
@@ -15,10 +20,10 @@ export const FinaleScreen = () => {
 
   // Gallery images with hover messages
   const galleryImages = [
-    { src: '/src/assets/extraPic1.jpg', caption: 'Woop, our first time😏💦' },
-    { src: '/src/assets/extraPic2.jpg', caption: 'So pretty...😍' },
-    { src: '/src/assets/extraPic3.jpg', caption: 'Plokamakiaaa' },
-    { src: '/src/assets/extraPic4.jpg', caption: 'Little Bouzouktzou' },
+    { src: extraPic1, caption: 'Woop, our first time😏💦' },
+    { src: extraPic2, caption: 'So pretty...😍' },
+    { src: extraPic3, caption: 'Plokamakiaaa' },
+    { src: extraPic4, caption: 'Little Bouzouktzou' },
   ];
 
   // Calculate days together
@@ -334,7 +339,7 @@ export const FinaleScreen = () => {
           }}
         >
           <img 
-            src="/src/assets/hearts.svg" 
+            src={heartsSvg} 
             alt="Hearts" 
             className="w-40 sm:w-48 h-auto"
           />
