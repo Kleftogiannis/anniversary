@@ -89,6 +89,7 @@ export const PhotoGallery = ({ images, isOpen, onClose }: PhotoGalleryProps) => 
               key={currentIndex}
               src={images[currentIndex].src}
               alt={images[currentIndex].caption || `Gallery ${currentIndex + 1}`}
+              loading="lazy"
               className="w-full h-auto max-h-[60vh] object-contain"
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}

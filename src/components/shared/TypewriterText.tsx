@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface TypewriterTextProps {
   text: string;
@@ -8,20 +8,30 @@ interface TypewriterTextProps {
 
 export const TypewriterText = ({ text, speed = 50, onComplete }: TypewriterTextProps) => {
   const [displayedText, setDisplayedText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const indexRef = useRef(0);
+  const hasCompletedRef = useRef(false);
 
   useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText((prev) => prev + text[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
-      }, speed);
+    // Reset state when text changes
+    indexRef.current = 0;
+    hasCompletedRef.current = false;
+    setDisplayedText('');
 
-      return () => clearTimeout(timeout);
-    } else if (currentIndex === text.length && onComplete) {
-      onComplete();
-    }
-  }, [currentIndex, text, speed, onComplete]);
+    const interval = setInterval(() => {
+      if (indexRef.current < text.length) {
+        setDisplayedText(text.slice(0, indexRef.current + 1));
+        indexRef.current++;
+      } else {
+        clearInterval(interval);
+        if (!hasCompletedRef.current && onComplete) {
+          hasCompletedRef.current = true;
+          onComplete();
+        }
+      }
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [text, speed, onComplete]);
 
   return <span>{displayedText}</span>;
 };

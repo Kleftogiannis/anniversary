@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { LoadingScreen } from './components/shared/LoadingScreen';
 import { CursorTrail } from './components/shared/CursorTrail';
+import { PWAInstallPrompt } from './components/shared/PWAInstallPrompt';
 
 // Lazy load route components for better performance
 const IntroScreen = lazy(() => import('./components/IntroScreen').then(module => ({ default: module.IntroScreen })));
@@ -18,7 +19,8 @@ function App() {
   return (
     <>
       <CursorTrail />
-      <AnimatePresence mode="wait">
+      <PWAInstallPrompt />
+      <AnimatePresence mode="wait" initial={false}>
         <Suspense fallback={<LoadingScreen message="Loading..." />}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<IntroScreen />} />

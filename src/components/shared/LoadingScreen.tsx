@@ -12,11 +12,11 @@ export const LoadingScreen = ({ message = 'Loading...' }: LoadingScreenProps) =>
     <motion.div
       className="min-h-screen flex items-center justify-center"
       style={{
-        background: 'linear-gradient(to bottom right, #caffbf, #bde0fe, #e0b0ff)'
+        background: 'linear-gradient(to bottom right, #ffc8dd, #e0b0ff, #bde0fe)'
       }}
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 1 }}
     >
       <div className="text-center">
         {/* Animated hearts loading indicator */}

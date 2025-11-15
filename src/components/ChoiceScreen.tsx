@@ -156,16 +156,6 @@ export const ChoiceScreen = ({ choiceIndex }: ChoiceScreenProps) => {
               >
                 {selectedChoice.response.message}
               </motion.p>
-
-              {/* Heart decorations */}
-              <motion.div
-                className="mt-4 sm:mt-6 text-3xl sm:text-4xl"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.5, type: 'spring' }}
-              >
-                💕
-              </motion.div>
             </motion.div>
           </motion.div>
         )}

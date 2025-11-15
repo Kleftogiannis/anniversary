@@ -12,13 +12,15 @@ button, a, [role="button"] {
 
 /* Performance optimizations for animations */
 @layer base {
-  /* Remove default white background */
+  /* Remove default white background and add soft pink */
   html,
   body,
   #root {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    background: linear-gradient(to bottom right, #ffc8dd, #e0b0ff, #bde0fe);
+    background-attachment: fixed;
   }
   
   /* Enable GPU acceleration for animated elements */

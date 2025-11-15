@@ -14,6 +14,7 @@ This is an interactive anniversary gift application that guides users through a 
 - **Navigation Guards**: Ensures users experience the story in the intended sequence
 - **Responsive Design**: Fully optimized for mobile, tablet, and desktop viewing
 - **Visual Effects**: Includes cursor trails, typewriter text, and particle animations
+- **PWA Features**: Installable on mobile devices, works offline, home screen icon
 
 ## 👥 Who Is It For?
 
@@ -48,6 +49,7 @@ This app is perfect for:
 - **Framer Motion** - Smooth animations and transitions
 - **Tailwind CSS v4** - Utility-first styling
 - **Canvas Confetti** - Celebration effects
+- **PWA (Progressive Web App)** - Installable, offline-capable
 - **GitHub Pages** - Easy deployment
 
 ## 📦 Installation
@@ -158,11 +160,11 @@ export const content: AppContent = {
 
 ### Technical Enhancements
 - [ ] Add unit and integration tests (Jest, React Testing Library)
-- [ ] Implement PWA features (offline support, install prompt)
-- [ ] Add SEO optimization with meta tags
+- [x] Implement PWA features (offline support, install prompt)
+- [x] Add SEO optimization with meta tags
 - [ ] Integrate analytics (Google Analytics, Plausible)
 - [ ] Add error tracking (Sentry)
-- [ ] Implement lazy loading for images
+- [x] Implement lazy loading for images
 - [ ] Add accessibility improvements (ARIA labels, keyboard navigation)
 
 ### Content Features

@@ -148,6 +148,7 @@ export const StoryScreen = ({ storyIndex }: StoryScreenProps) => {
                       <img
                         src={story.image}
                         alt={story.imageAlt}
+                        loading="lazy"
                         onError={handleImageError}
                         onLoad={handleImageLoad}
                         className="w-full h-auto object-cover"
