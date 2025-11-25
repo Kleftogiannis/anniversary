@@ -25,11 +25,11 @@ export const IntroScreen = () => {
     const storyImages = content.stories
       .map(story => story.image)
       .filter(Boolean);
-    
+
     const choiceImages = content.choices
       .flatMap(choice => choice.options.map(option => option.response.image))
       .filter(Boolean);
-    
+
     const imagesToPreload = [...storyImages, ...choiceImages];
 
     // Short timeout to prevent blocking - preloading is optional
@@ -49,7 +49,7 @@ export const IntroScreen = () => {
     // Attempt to preload images in background (non-blocking)
     imagesToPreload.forEach(src => {
       if (!src) return;
-      
+
       const img = new Image();
       img.onload = () => {
         loadedCount++;
@@ -73,7 +73,7 @@ export const IntroScreen = () => {
   }, []);
 
   const handleStart = () => {
-    navigate('/story/1');
+    navigate('/lock');
   };
 
   if (isLoading) {
@@ -112,7 +112,7 @@ export const IntroScreen = () => {
           <div className="absolute bottom-2 right-2 text-2xl opacity-60">🍂</div>
 
           {/* Inner wooden frame */}
-          <div 
+          <div
             className="p-6 sm:p-8 rounded-lg"
             style={{
               background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%)',
@@ -120,9 +120,9 @@ export const IntroScreen = () => {
             }}
           >
             {/* Title with pixel font */}
-            <h1 
+            <h1
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 sm:mb-6 leading-tight"
-              style={{ 
+              style={{
                 fontFamily: 'Pixelify Sans, sans-serif',
                 color: '#5d4037',
                 textShadow: '2px 2px 0px rgba(255,255,255,0.5), -1px -1px 0px rgba(139, 90, 43, 0.3)',
@@ -132,9 +132,9 @@ export const IntroScreen = () => {
             </h1>
 
             {/* Subtitle with typewriter animation */}
-            <p 
+            <p
               className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 min-h-[2rem] px-2"
-              style={{ 
+              style={{
                 fontFamily: 'Pixelify Sans, sans-serif',
                 color: '#6d4c41',
               }}

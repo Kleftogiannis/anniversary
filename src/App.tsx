@@ -7,6 +7,7 @@ import { PWAInstallPrompt } from './components/shared/PWAInstallPrompt';
 
 // Lazy load route components for better performance
 const IntroScreen = lazy(() => import('./components/IntroScreen').then(module => ({ default: module.IntroScreen })));
+const LockScreen = lazy(() => import('./components/LockScreen').then(module => ({ default: module.LockScreen })));
 const StoryScreen = lazy(() => import('./components/StoryScreen').then(module => ({ default: module.StoryScreen })));
 const TimelineScreen = lazy(() => import('./components/TimelineScreen').then(module => ({ default: module.TimelineScreen })));
 const ChoiceScreen = lazy(() => import('./components/ChoiceScreen').then(module => ({ default: module.ChoiceScreen })));
@@ -22,93 +23,101 @@ function App() {
       <PWAInstallPrompt />
       <AnimatePresence mode="wait" initial={false}>
         <Suspense fallback={<LoadingScreen message="Loading..." />}>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<IntroScreen />} />
-          <Route 
-            path="/story/1" 
-            element={
-              <NavigationGuard>
-                <StoryScreen storyIndex={0} />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/story/2" 
-            element={
-              <NavigationGuard>
-                <StoryScreen storyIndex={1} />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/story/3" 
-            element={
-              <NavigationGuard>
-                <StoryScreen storyIndex={2} />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/story/4" 
-            element={
-              <NavigationGuard>
-                <StoryScreen storyIndex={3} />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/story/5" 
-            element={
-              <NavigationGuard>
-                <StoryScreen storyIndex={4} />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/timeline" 
-            element={
-              <NavigationGuard>
-                <TimelineScreen />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/choice/1" 
-            element={
-              <NavigationGuard>
-                <ChoiceScreen choiceIndex={0} />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/choice/2" 
-            element={
-              <NavigationGuard>
-                <ChoiceScreen choiceIndex={1} />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/choice/3" 
-            element={
-              <NavigationGuard>
-                <ChoiceScreen choiceIndex={2} />
-              </NavigationGuard>
-            } 
-          />
-          <Route 
-            path="/finale" 
-            element={
-              <NavigationGuard>
-                <FinaleScreen />
-              </NavigationGuard>
-            } 
-          />
-          {/* 404 redirect to intro screen */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Suspense>
-    </AnimatePresence>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<IntroScreen />} />
+            <Route
+              path="/lock"
+              element={
+                <NavigationGuard>
+                  <LockScreen />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/story/1"
+              element={
+                <NavigationGuard>
+                  <StoryScreen storyIndex={0} />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/story/2"
+              element={
+                <NavigationGuard>
+                  <StoryScreen storyIndex={1} />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/story/3"
+              element={
+                <NavigationGuard>
+                  <StoryScreen storyIndex={2} />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/story/4"
+              element={
+                <NavigationGuard>
+                  <StoryScreen storyIndex={3} />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/story/5"
+              element={
+                <NavigationGuard>
+                  <StoryScreen storyIndex={4} />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/timeline"
+              element={
+                <NavigationGuard>
+                  <TimelineScreen />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/choice/1"
+              element={
+                <NavigationGuard>
+                  <ChoiceScreen choiceIndex={0} />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/choice/2"
+              element={
+                <NavigationGuard>
+                  <ChoiceScreen choiceIndex={1} />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/choice/3"
+              element={
+                <NavigationGuard>
+                  <ChoiceScreen choiceIndex={2} />
+                </NavigationGuard>
+              }
+            />
+            <Route
+              path="/finale"
+              element={
+                <NavigationGuard>
+                  <FinaleScreen />
+                </NavigationGuard>
+              }
+            />
+            {/* 404 redirect to intro screen */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
+      </AnimatePresence>
     </>
   );
 }
